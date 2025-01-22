@@ -2,12 +2,14 @@ package com.example.assignment2_kotlin
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.assignment2_kotlin.model.Model
@@ -30,6 +32,13 @@ class StudentDetailsActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        // הגדרת ה-Toolbar
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = "Student Details"
+
 
         // קישור רכיבי ה-UI
         nameTextView = findViewById(R.id.details_name_text_view)
@@ -64,6 +73,16 @@ class StudentDetailsActivity : AppCompatActivity() {
         idTextView.text = student.id
         avatarImageView.setImageResource(R.drawable.avatar) // שימוש בתמונה מה-drawable
         checkBox.isChecked = student.isChecked
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                finish() // חזרה למסך הקודם
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
 }
