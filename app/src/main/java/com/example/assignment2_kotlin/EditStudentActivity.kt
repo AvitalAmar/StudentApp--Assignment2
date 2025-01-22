@@ -1,10 +1,12 @@
 package com.example.assignment2_kotlin
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -59,11 +61,28 @@ class EditStudentActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.edit_delete_button).setOnClickListener {
             Model.shared.deleteStudent(student.id)
-            finish()
+            showToastAndNavigateToStudentList()
         }
 
         findViewById<Button>(R.id.edit_cancel_button).setOnClickListener {
             finish()
         }
+    }
+
+    private fun showToastAndNavigateToStudentList() {
+        // הצגת הודעת Toast עם פרטי הסטודנט שנמחק
+        Toast.makeText(
+            this,
+            "Student deleted: ${student.name}, ID: ${student.id}",
+            Toast.LENGTH_SHORT
+        ).show()
+
+        // ניווט חזרה למסך תצוגת הסטודנטים
+        val intent = Intent(this, StudentsViewActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
+
+        // סיום Activity הנוכחי
+        finish()
     }
 }
