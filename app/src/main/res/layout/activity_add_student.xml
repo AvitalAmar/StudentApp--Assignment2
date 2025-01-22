@@ -65,6 +65,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView2" />
 
+    <CheckBox
+        android:id="@+id/add_student_activity_checked_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Checked"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/add_student_activity_id_edit_text"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp" />
+
     <Button
         android:id="@+id/add_student_activity_save_button"
         android:layout_width="0dp"

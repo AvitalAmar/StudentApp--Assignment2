@@ -2,6 +2,7 @@ package com.example.assignment2_kotlin
 
 import android.os.Bundle
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
@@ -27,6 +28,7 @@ class AddStudentActivity : AppCompatActivity() {
         val cancelButton: Button = findViewById(R.id.add_student_activity_cancel_button)
         val nameEditText: EditText = findViewById(R.id.add_student_activity_name_edit_text)
         val idEditText: EditText = findViewById(R.id.add_student_activity_id_edit_text)
+        val checkBox: CheckBox = findViewById(R.id.add_student_activity_checked_checkbox)
         val savedMessageTextView : TextView = findViewById(R.id.add_student_activity_save_message_text_view)
 
         cancelButton.setOnClickListener{
@@ -36,11 +38,12 @@ class AddStudentActivity : AppCompatActivity() {
         saveButton.setOnClickListener{
             val name = nameEditText.text.toString().trim()
             val id = idEditText.text.toString().trim()
+            val isChecked = checkBox.isChecked
 
             if (name.isNotBlank() && id.isNotBlank()) {
-                val newStudent = Student(name = name, id = id, avatarUrl = "", isChecked = false)
+                val newStudent = Student(name = name, id = id, avatarUrl = "", isChecked = isChecked)
                 Model.shared.addStudent(newStudent) // שמירה במודל
-                savedMessageTextView.text = "Student saved: $name, ID: $id"
+                savedMessageTextView.text = "Student saved: $name, ID: $id Checked: $isChecked"
                 finish() // חוזר למסך הקודם
             } else {
                 savedMessageTextView.text = "Please fill in all fields"
