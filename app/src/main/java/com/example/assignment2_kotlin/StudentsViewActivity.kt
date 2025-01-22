@@ -3,11 +3,13 @@ package com.example.assignment2_kotlin
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.assignment2_kotlin.model.Model
@@ -22,6 +24,11 @@ class StudentsViewActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_students_view)
+
+        // הגדרת ה-Toolbar
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar?.title = "Students List"
 
         // אתחול רשימת הסטודנטים
         students = Model.shared.students
@@ -44,6 +51,7 @@ class StudentsViewActivity : AppCompatActivity() {
         // רענון הרשימה כאשר חוזרים למסך
         recyclerView.adapter?.notifyDataSetChanged()
     }
+
 }
 
 class StudentsViewAdapter(private val students: List<Student>?) : RecyclerView.Adapter<StudentsViewAdapter.StudentViewHolder>() {
@@ -85,4 +93,7 @@ class StudentsViewAdapter(private val students: List<Student>?) : RecyclerView.A
             }
         }
     }
+
+
 }
+
