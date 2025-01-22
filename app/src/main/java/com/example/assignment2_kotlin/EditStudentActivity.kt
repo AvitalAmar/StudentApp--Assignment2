@@ -2,6 +2,7 @@ package com.example.assignment2_kotlin
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
@@ -9,6 +10,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.assignment2_kotlin.model.Model
@@ -31,6 +33,12 @@ class EditStudentActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        // הגדרת ה-Toolbar
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = "Edit Student"
 
         // קישור רכיבי ה-UI
         avatarImageView = findViewById(R.id.edit_avatar_image_view)
@@ -84,5 +92,15 @@ class EditStudentActivity : AppCompatActivity() {
 
         // סיום Activity הנוכחי
         finish()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                finish() // חזרה למסך הקודם
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }
