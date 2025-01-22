@@ -8,6 +8,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.assignment2_kotlin.model.Model
+import com.example.assignment2_kotlin.model.Student
+
 
 class AddStudentActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +34,17 @@ class AddStudentActivity : AppCompatActivity() {
         }
 
         saveButton.setOnClickListener{
-            savedMessageTextView.text = "Name:${nameEditText.text} ID:${idEditText.text} is saved!"
+            val name = nameEditText.text.toString().trim()
+            val id = idEditText.text.toString().trim()
+
+            if (name.isNotBlank() && id.isNotBlank()) {
+                val newStudent = Student(name = name, id = id, avatarUrl = "", isChecked = false)
+                Model.shared.addStudent(newStudent) // שמירה במודל
+                savedMessageTextView.text = "Student saved: $name, ID: $id"
+                finish() // חוזר למסך הקודם
+            } else {
+                savedMessageTextView.text = "Please fill in all fields"
+            }
         }
 
     }
